@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion, useMotionTemplate, useScroll, useTransform } from "framer-motion";
 import MotionSection from "./MotionSection";
+import SiteNav from "./SiteNav";
 
 const workItems = [
   {
@@ -52,19 +53,19 @@ function StickyHero() {
     offset: ["start start", "end end"],
   });
 
-  const clipStart = useTransform(scrollYProgress, [0, 0.45], [20, 0]);
-  const clipEnd = useTransform(scrollYProgress, [0, 0.45], [80, 100]);
+  const clipStart = useTransform(scrollYProgress, [0, 0.22], [8, 0]);
+  const clipEnd = useTransform(scrollYProgress, [0, 0.22], [92, 100]);
   const clipPath = useMotionTemplate`polygon(${clipStart}% ${clipStart}%, ${clipEnd}% ${clipStart}%, ${clipEnd}% ${clipEnd}%, ${clipStart}% ${clipEnd}%)`;
 
-  const imageScale = useTransform(scrollYProgress, [0, 0.8], [1.45, 1]);
-  const imageY = useTransform(scrollYProgress, [0, 1], [-120, 120]);
-  const textY = useTransform(scrollYProgress, [0, 1], [0, -180]);
-  const textOpacity = useTransform(scrollYProgress, [0, 0.58], [1, 0.08]);
+  const imageScale = useTransform(scrollYProgress, [0, 0.5], [1.14, 1]);
+  const imageY = useTransform(scrollYProgress, [0, 1], [-40, 90]);
+  const textY = useTransform(scrollYProgress, [0, 1], [0, -140]);
+  const textOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0.16]);
   const sideY = useTransform(scrollYProgress, [0, 1], [0, 220]);
   const markerY = useTransform(scrollYProgress, [0, 1], [0, -120]);
 
   return (
-    <section ref={heroRef} className="relative h-[220vh] border-b border-white/10">
+    <section ref={heroRef} className="relative h-[175vh] border-b border-white/10">
       <div className="sticky top-0 h-screen overflow-hidden">
         <motion.div
           style={{ y: imageY, scale: imageScale, clipPath }}
@@ -75,11 +76,11 @@ function StickyHero() {
             alt="Abstract studio atmosphere"
             fill
             priority
-            className="object-cover grayscale"
+            className="object-cover object-center grayscale"
           />
-          <div className="absolute inset-0 bg-black/55" />
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_18%,rgba(0,0,0,0.5)_78%)]" />
-          <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.05),rgba(0,0,0,0.64))]" />
+          <div className="absolute inset-0 bg-black/32" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.06),rgba(0,0,0,0.18)_44%,rgba(0,0,0,0.56)_100%)]" />
+          <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.12),rgba(0,0,0,0.42))]" />
         </motion.div>
 
         <motion.div
@@ -181,20 +182,7 @@ export default function HomepageExperience() {
       <div className="pointer-events-none fixed inset-0 opacity-[0.14] [background-image:linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] [background-size:84px_84px]" />
       <div className="pointer-events-none fixed inset-0 bg-[radial-gradient(circle_at_center,transparent_28%,rgba(0,0,0,0.55)_100%)]" />
 
-      <div className="mx-auto flex min-h-screen max-w-7xl flex-col px-5 sm:px-8 lg:px-10">
-        <header className="fixed left-0 right-0 top-0 z-50">
-          <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-5 text-sm uppercase tracking-[0.24em] text-white/72 sm:px-8 lg:px-10">
-            <Link href="/" className="text-white mix-blend-difference">
-              Split Brain Creative
-            </Link>
-            <nav className="flex items-center gap-5 sm:gap-8 mix-blend-difference">
-              <Link href="/work" className="transition hover:text-white">Work</Link>
-              <Link href="/about" className="transition hover:text-white">About</Link>
-              <Link href="/contact" className="transition hover:text-white">Contact</Link>
-            </nav>
-          </div>
-        </header>
-      </div>
+      <SiteNav fixed />
 
       <StickyHero />
 
